@@ -11,7 +11,7 @@ class App extends Component {
             { id: 2, name: 'Product#2', amount: 9, buy: 0 },
             { id: 3, name: 'Product#3', amount: 8, buy: 0 },
             { id: 4, name: 'Product#4', amount: 7, buy: 0 },
-            { id: 5, name: 'Product#55', amount: 6, buy: 0 }
+            { id: 5, name: 'Product#5', amount: 6, buy: 0 }
         ]
     }
 
