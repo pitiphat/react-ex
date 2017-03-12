@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Products} from '../components';
-import {Cart} from '../components';
+import {Products, Navbar, Cart} from '../components';
+
 
 class App extends Component {
 
@@ -11,8 +11,9 @@ class App extends Component {
             { id: 2, name: 'Product#2', amount: 9, buy: 0 },
             { id: 3, name: 'Product#3', amount: 8, buy: 0 },
             { id: 4, name: 'Product#4', amount: 7, buy: 0 },
-            { id: 5, name: 'Product#55', amount: 6, buy: 0 }
-        ]
+            { id: 5, name: 'Product#5', amount: 6, buy: 0 }
+        ],
+        amounts:{total: 0}
     }
 
 changeBuy =(id, amount)=>{
@@ -20,12 +21,20 @@ changeBuy =(id, amount)=>{
   const index = products.findIndex(product => product.id === id)
   const product = products[index]
 
+  const {amounts} = this.state
+
   this.setState({
     products:[
       ...products.slice(0, index),
       {...product, buy: product.buy + amount},
       ...products.slice(index+1)
     ]
+  })
+
+  this.setState({
+    amounts:
+      {...amounts, total:amounts.total+amount}
+    
   })
 }
 
@@ -41,9 +50,19 @@ reduceBuy = ()=>id=>this.changeBuy(id, -1)
 
 increaseBuy = () =>id=>this.changeBuy(id, +1)
 
+count_item=(total)=>{
+  
+  return this.state.amounts;
+}
+
   render() {
     return (
+      
       <div className="container">
+        <Navbar 
+          products={this.getProductInCart()}
+          cart_count={this.count_item()}
+        />
         <div className="row">
           <div className="col-md-4">
 
@@ -52,10 +71,12 @@ increaseBuy = () =>id=>this.changeBuy(id, +1)
                 products={this.getAvailableProducts()}
                 onAddToCart={this.increaseBuy()}/>
 
-                <Cart 
+                 <Cart 
                   products={this.getProductInCart()}
                   onRemove={this.reduceBuy()}
                 />
+               
+             
             </div>   
           </div>
       </div>
