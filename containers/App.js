@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Products, Navbar, Cart} from '../components';
+import {Products, Navbar} from '../components';
 
 
 class App extends Component {
@@ -62,6 +62,7 @@ count_item=(total)=>{
         <Navbar 
           products={this.getProductInCart()}
           cart_count={this.count_item()}
+          onRemove={this.reduceBuy()}
         />
         <div className="row">
           <div className="col-md-4">
@@ -71,10 +72,10 @@ count_item=(total)=>{
                 products={this.getAvailableProducts()}
                 onAddToCart={this.increaseBuy()}/>
 
-                 <Cart 
+                 {/*<Cart 
                   products={this.getProductInCart()}
                   onRemove={this.reduceBuy()}
-                />
+                />*/}
                
              
             </div>   
