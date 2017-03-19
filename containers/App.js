@@ -14,36 +14,47 @@ class App extends Component {
             { id: 4, name: 'Product#4', amount: 7, buy: 0, price:400},
             { id: 5, name: 'Product#5', amount: 6, buy: 0, price:500}
         ],
-        amounts:{total: 0},
-        totalPrices:{totalPrice: 0}
+        quantitys:{value: 0},
+        totalPrices:{value: 0}
     }
 
 changeBuy =(id, amount)=>{
-  const{ products } = this.state
-  const index = products.findIndex(product => product.id === id)
-  const product = products[index]
 
-  const {amounts} = this.state
-  const {totalPrices} = this.state
+  this.setState(prevState=>{
 
-  this.setState({
-    products:[
-      ...products.slice(0, index),
-      {...product, buy: product.buy + amount},
-      ...products.slice(index+1)
-    ]
+      const{ products } = prevState
+      const index = products.findIndex(product => product.id === id)
+      const product = products[index]
+      return{
+            products:[
+              ...products.slice(0, index),
+              {...product, buy: product.buy + amount},
+              ...products.slice(index+1)
+            ]
+      }
   })
 
-  this.setState({
-    amounts:
-      {...amounts, total:amounts.total+amount}
+  this.setState(prevState=>{
+    const {quantitys} = prevState
+    return{
+        quantitys:
+      {...quantitys, value:quantitys.value+amount}
+    }
+  })
+
+  this.setState(prevState=>{
     
+      const{ products } = prevState
+      const index = products.findIndex(product => product.id === id)
+      const product = products[index]
+
+      const {totalPrices} = prevState
+      return{
+          totalPrices:
+        {...totalPrices, value:totalPrices.value+(product.price*amount)}
+      }
   })
-    this.setState({
-    totalPrices:
-      {...totalPrices, totalPrice:totalPrices.totalPrice+(product.price*amount)}
-    
-  })
+
 }
 
 getAvailableProducts=()=>{
@@ -59,7 +70,7 @@ reduceBuy = ()=>id=>this.changeBuy(id, -1)
 increaseBuy = () =>id=>this.changeBuy(id, +1)
 
 count_item=()=>{
-  return this.state.amounts;
+  return this.state.quantitys;
 }
 total_price=()=>{
   return this.state.totalPrices;
@@ -69,6 +80,7 @@ total_price=()=>{
     return (
       
       <div className="container-fluid" style={{'font-family': 'Crimson Text'}}>
+        
         <Navbar 
           products={this.getProductInCart()}
           cart_count={this.count_item()}

@@ -20,13 +20,15 @@ const Navbar = ({products, onRemove,cart_count, total_price}) => (
           <i className="fa fa-cart-plus fa-2x" style={{color:'#9d9d9d', margin:'10px'}}></i>
           <span className='badge' style={{marginTop:'-8px'}}>    
             {
-              cart_count.total
+              
+              cart_count.value
             }
           </span>
         </span>
- 
+
+        {cart_count.value > 0 && //เหมือนการใช้ if
            <div className="dropdown-content">
-              {
+              {         
                   <Cart
                       products={products}
                       onRemove={onRemove}
@@ -34,6 +36,7 @@ const Navbar = ({products, onRemove,cart_count, total_price}) => (
                   />         
               }
            </div>
+        }
       </li>
       <li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>

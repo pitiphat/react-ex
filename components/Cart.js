@@ -15,17 +15,19 @@ const Cart=({products, onRemove, total}) => (
                             <span>
                                 <img  alt="Smiley face" src="http://site.nd.co.th/thaiwahclub/mypic/no_img.gif"  height="100" width="100" />
                             </span>
-                            <div style={{position:'absolute',  marginTop:'-80px', marginLeft:'100px'}}>
+                            <div style={{position:'absolute',  marginTop:'-80px', marginLeft:'130px'}}>
                                 <b>{name}</b><br/>
                             </div>
-                            <span> 
-                                <b>$200</b><br/>
+                            <span style={{position:'absolute',  marginTop:'40px', marginLeft:'30px', fontSize:'12px'}}> 
+                                <b>${price}</b><br/>
                             </span>
-                            <span style={{position:'absolute',  marginTop:'-40px', marginLeft:'100px', fontSize:'12px'}}>
+                            <span style={{position:'absolute',  marginTop:'60px', marginLeft:'30px', fontSize:'12px'}}>
                                 Quantity: {buy}
-                            </span>
+                            </span><br/>
                               <span style={{float:'right'}}>
-                                Total: {buy * price}
+                                  <b>
+                                    Total: {buy * price}
+                                  </b>
                             </span>
                             <div>
                                 <button style={{'border-radius': '4px'}}
@@ -44,7 +46,7 @@ const Cart=({products, onRemove, total}) => (
              <div>
                  <b>
                     <span style={{float:'left',fontSize:'18px' }}>TOTAL:</span>
-                    <span style={{float:'right', fontSize:'18px'  }}> ${total.totalPrice} </span>
+                    <span style={{float:'right', fontSize:'18px'  }}> ${total.value} </span>
                  </b>
             </div>
         </ul>   
