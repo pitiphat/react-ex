@@ -10,9 +10,9 @@ const Product=({id, name, amount, onClick, btnTxt}) => (
 
             <div>
                 <button
-                className='btn btn-default btn-sm'
-                onClick={()=>onClick(id)}>
-                {btnTxt}
+                    className='btn btn-default btn-sm'
+                    onClick={()=>onClick(id)}>
+                    {btnTxt}
                 </button>
             </div>
         </div>    

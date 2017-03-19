@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import {Products, Navbar} from '../components';
 
 
+
 class App extends Component {
 
 
      state={
         products:[
-            { id: 1, name: 'Product#1', amount: 10, buy: 0 },
-            { id: 2, name: 'Product#2', amount: 9, buy: 0 },
-            { id: 3, name: 'Product#3', amount: 8, buy: 0 },
-            { id: 4, name: 'Product#4', amount: 7, buy: 0 },
-            { id: 5, name: 'Product#5', amount: 6, buy: 0 }
+            { id: 1, name: 'Product#1', amount: 10, buy: 0,  price:100},
+            { id: 2, name: 'Product#2', amount: 9, buy: 0, price:200},
+            { id: 3, name: 'Product#3', amount: 8, buy: 0, price:300},
+            { id: 4, name: 'Product#4', amount: 7, buy: 0, price:400},
+            { id: 5, name: 'Product#5', amount: 6, buy: 0, price:500}
         ],
-        amounts:{total: 0}
+        amounts:{total: 0},
+        totalPrices:{totalPrice: 0}
     }
 
 changeBuy =(id, amount)=>{
@@ -22,6 +24,7 @@ changeBuy =(id, amount)=>{
   const product = products[index]
 
   const {amounts} = this.state
+  const {totalPrices} = this.state
 
   this.setState({
     products:[
@@ -34,6 +37,11 @@ changeBuy =(id, amount)=>{
   this.setState({
     amounts:
       {...amounts, total:amounts.total+amount}
+    
+  })
+    this.setState({
+    totalPrices:
+      {...totalPrices, totalPrice:totalPrices.totalPrice+(product.price*amount)}
     
   })
 }
@@ -50,18 +58,21 @@ reduceBuy = ()=>id=>this.changeBuy(id, -1)
 
 increaseBuy = () =>id=>this.changeBuy(id, +1)
 
-count_item=(total)=>{
-  
+count_item=()=>{
   return this.state.amounts;
+}
+total_price=()=>{
+  return this.state.totalPrices;
 }
 
   render() {
     return (
       
-      <div className="container">
+      <div className="container-fluid" style={{'font-family': 'Crimson Text'}}>
         <Navbar 
           products={this.getProductInCart()}
           cart_count={this.count_item()}
+          total_price={this.total_price()}
           onRemove={this.reduceBuy()}
         />
         <div className="row">
